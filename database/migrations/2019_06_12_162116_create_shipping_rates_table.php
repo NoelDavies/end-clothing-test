@@ -15,6 +15,7 @@ class CreateShippingRatesTable extends Migration
     {
         Schema::create('shipping_rates', function (Blueprint $table) {
 //            $table->uuid('id');
+            $table->string('slug');
             $table->string('name');
             $table->string('country_code');
             $table->float('from_value');

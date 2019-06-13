@@ -17,14 +17,10 @@ use Illuminate\Http\Request;
 Route::prefix('v1')->group(function () {
 
     Route::prefix('shipping-rates')->group(function () {
-        Route::prefix('{name}')->where(['name' => '[A-Za-z\-_]+'])->group(function () {
-            // SRP controllers Invoke was causing laravel to throw a hissy fit
-            Route::put('/', 'CreateShippingRateController');
-            Route::get('/', 'ShowShippingRateController');
-        });
-        Route::get('/', function () {
-            return 'LIST';
-        });
+        Route::put('{rate_name}', 'CreateShippingRateController')->where(['rate_name' => '[A-Za-z\-_]+']);
+        Route::get('{rate}', 'ShowShippingRateController');
+        Route::delete('{rate}', 'ShowShippingRateController');
     });
+    Route::post('calculate', 'CalculateShippingController');
 });
 //});
